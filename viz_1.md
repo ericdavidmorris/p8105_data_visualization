@@ -32,7 +32,7 @@ Blank plot..
 ggplot(weather_df, aes(x = tmin, y = tmax))
 ```
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-1-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-1-1.png" width="90%" />
 
 Scatterplot
 
@@ -43,7 +43,7 @@ ggplot(weather_df, aes(x = tmin, y = tmax)) +
 
     ## Warning: Removed 15 rows containing missing values (geom_point).
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-2-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-2-1.png" width="90%" />
 
 Filtering Central Park without having to also create a new data frame
 
@@ -54,7 +54,7 @@ weather_df %>%
   geom_point()
 ```
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-3-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-3-1.png" width="90%" />
 
 More plot options
 -----------------
@@ -66,7 +66,7 @@ ggplot(weather_df, aes(x = tmin, y = tmax)) +
 
     ## Warning: Removed 15 rows containing missing values (geom_point).
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-4-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-4-1.png" width="90%" />
 
 Add a geom (se = FALSE will turn off confidence bands)
 
@@ -82,7 +82,7 @@ ggplot(weather_df, aes(x = tmin, y = tmax)) +
 
     ## Warning: Removed 15 rows containing missing values (geom_point).
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-5-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-5-1.png" width="90%" />
 
 Making points more transparent
 
@@ -98,7 +98,7 @@ ggplot(weather_df, aes(x = tmin, y = tmax)) +
 
     ## Warning: Removed 15 rows containing missing values (geom_point).
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-6-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-6-1.png" width="90%" />
 
 Adding some more options and switching everything around
 
@@ -114,7 +114,7 @@ ggplot(weather_df, aes(x = tmin, y = tmax, color = name)) +
 
     ## Warning: Removed 15 rows containing missing values (geom_point).
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-7-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-7-1.png" width="90%" />
 
 Facetting...
 
@@ -131,7 +131,7 @@ ggplot(weather_df, aes(x = tmin, y = tmax, color = name)) +
 
     ## Warning: Removed 15 rows containing missing values (geom_point).
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-8-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-8-1.png" width="90%" />
 
 A more interesting plot
 
@@ -142,7 +142,7 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
 
     ## Warning: Removed 3 rows containing missing values (geom_point).
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-9-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-9-1.png" width="90%" />
 
 Lines instead of points
 
@@ -151,7 +151,7 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
   geom_line()
 ```
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-10-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-10-1.png" width="90%" />
 
 Back to points and adding more stuff
 
@@ -168,7 +168,7 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
 
     ## Warning: Removed 3 rows containing missing values (geom_point).
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-11-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-11-1.png" width="90%" />
 
 ``` r
 ggplot(weather_df, aes(x = date, y = tmax, color = name, size = prcp)) + 
@@ -183,4 +183,88 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name, size = prcp)) +
 
     ## Warning: Removed 3 rows containing missing values (geom_point).
 
-![](viz_1_files/figure-markdown_github/unnamed-chunk-12-1.png)
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-12-1.png" width="90%" />
+
+Univariate Plots
+----------------
+
+Histogram
+
+``` r
+ggplot(weather_df, aes(x = tmax)) + 
+  geom_histogram()
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_bin).
+
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-13-1.png" width="90%" />
+
+``` r
+ggplot(weather_df, aes(x = tmax, fill = name)) + 
+  geom_histogram()
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_bin).
+
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-14-1.png" width="90%" />
+
+Density mapping
+
+``` r
+ggplot(weather_df, aes(x = tmax, fill = name)) + 
+  geom_density(alpha = 0.5)
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_density).
+
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-15-1.png" width="90%" />
+
+Boxplots
+
+``` r
+ggplot(weather_df, aes(x = name, y = tmax)) + 
+  geom_boxplot()
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
+
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-16-1.png" width="90%" />
+
+Violin plot?
+
+``` r
+ggplot(weather_df, aes(x = name, y = tmax)) + 
+  geom_violin()
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_ydensity).
+
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-17-1.png" width="90%" />
+
+ggridges, flipping violins
+
+``` r
+ggplot(weather_df, aes(x = tmax, y = name)) + 
+  geom_density_ridges()
+```
+
+    ## Picking joint bandwidth of 1.84
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_density_ridges).
+
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-18-1.png" width="90%" />
+
+Saving plots -&gt; adding little knitr snippet at beginning of markdown to make all graphs the same consistent size as well as increasing font size for when you save plots
+
+``` r
+weather_plot = ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = .5) 
+
+ggsave("weather_plot.pdf", weather_plot, width = 8, height = 5)
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
