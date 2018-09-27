@@ -1,0 +1,15 @@
+---
+title: "Visualization with ggplot2"
+author: "Eric Morris"
+date: "9/27/2018"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(ggridges)
+```
+
+## Section 1 
