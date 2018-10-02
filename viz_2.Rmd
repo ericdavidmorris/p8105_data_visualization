@@ -6,10 +6,10 @@ output: github_document
 ---
 
 ```{r setup}
-devtools::install_github("thomasp85/patchwork")
 library(tidyverse)
 library(ggridges)
 library(patchwork)
+library(ggthemes)
 
 knitr::opts_chunk$set(
   fig.width = 6,
@@ -70,6 +70,115 @@ ggplot(weather_df, aes(x = tmin, y = tmax)) +
   ) + 
   scale_x_continuous(
     breaks = c(-15, 0, 15), 
-                     labels = c("-15º C", "0", "15"))
+    labels = c("-15º C", "0", "15"))
 ```
 
+Controlling limits and adding scale to y axis
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = .5) + 
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maxiumum daily temperature (C)",
+    caption = "Data from the rnoaa package"
+  ) + 
+  scale_x_continuous(breaks = c(-15, 0, 15), 
+                     labels = c("-15ºC", "0", "15"),
+                     limits = c(-20, 30)) + 
+  scale_y_continuous(trans = "sqrt", 
+                     position = "right")
+```
+
+## Colors and themes
+
+Adjust color
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = .5) + 
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maxiumum daily temperature (C)",
+    caption = "Data from the rnoaa package"
+  ) + 
+  scale_color_hue(
+    name = "Location",
+    h = c(100, 350),
+    l = 75)
+```
+
+Viridis package for color pallettes and theme to move legend to bottom of plot
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = .5) + 
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maxiumum daily temperature (C)",
+    caption = "Data from the rnoaa package"
+  ) + 
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+  ) + 
+  theme(legend.position = "bottom")
+```
+
+Other theme options 
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = .5) + 
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maxiumum daily temperature (C)",
+    caption = "Data from the rnoaa package"
+  ) + 
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+  ) + 
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+
+
+Learning assessment: tmax against date: 
+
+```{r}
+ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
+  geom_point(aes(size = prcp), alpha = .75) + 
+  geom_smooth(se = FALSE) +
+  labs(
+    title = "Date v. Tmax Assessment",
+    x = "Date",
+    y = "Maxiumum daily temperature (C)",
+    caption = "Data from the rnoaa package"
+  ) + 
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+  ) + 
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+
+## Arguments to geom
+
+```{r}
+centralpark_df = weather_df %>% 
+  filter(name == "CentralPark_NY")
+waikiki_df = weather_df %>% 
+  filter(name == "Waikiki_HA")
+
+ggplot(waikiki_df, aes(x = date, y = tmax, color = name)) +
+  geom_point() +
+  geom_line(data = centralpark_df)
+```
+
+## Patchwork 
