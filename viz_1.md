@@ -268,3 +268,24 @@ ggsave("weather_plot.pdf", weather_plot, width = 8, height = 5)
 ```
 
     ## Warning: Removed 15 rows containing missing values (geom_point).
+
+Last example
+------------
+
+``` r
+ggplot(weather_df, aes(y = prcp, x = name)) +
+  geom_boxplot()
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
+
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-20-1.png" width="90%" />
+
+``` r
+weather_df %>% 
+  filter(prcp > 0) %>% 
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_density(alpha = .5)
+```
+
+<img src="viz_1_files/figure-markdown_github/unnamed-chunk-21-1.png" width="90%" />

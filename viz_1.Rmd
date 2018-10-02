@@ -182,3 +182,17 @@ weather_plot = ggplot(weather_df, aes(x = tmin, y = tmax)) +
 ggsave("weather_plot.pdf", weather_plot, width = 8, height = 5)
 ```
 
+## Last example
+
+```{r}
+ggplot(weather_df, aes(y = prcp, x = name)) +
+  geom_boxplot()
+```
+
+```{r}
+weather_df %>% 
+  filter(prcp > 0) %>% 
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_density(alpha = .5)
+```
+
