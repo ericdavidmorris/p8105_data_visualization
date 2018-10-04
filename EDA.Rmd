@@ -103,3 +103,69 @@ weather_df %>%
   knitr::kable(digits = 3)
 ```
 
+
+## Grouped Mutate
+
+```{r}
+weather_df %>%
+  group_by(name, month) %>%
+  mutate(mean_tmax = mean(tmax, na.rm = TRUE))
+```
+
+More interesting example
+
+```{r}
+weather_df %>%
+  group_by(name) %>%
+  mutate(mean_tmax = mean(tmax, na.rm = TRUE),
+         centered_tmax = tmax - mean_tmax) %>% 
+  ggplot(aes(x = date, y = centered_tmax, color = name))+
+  geom_point()
+```
+
+
+## Window functions 
+
+Using ranks
+
+```{r}
+weather_df %>%
+  group_by(name, month) %>%
+  mutate(tmax_rank = min_rank(tmax))
+```
+
+```{r}
+weather_df %>%
+  group_by(name, month) %>%
+  mutate(tmax_rank = min_rank(tmax)) %>% 
+  filter(tmax_rank < 2)
+```
+
+```{r}
+weather_df %>%
+  group_by(name, month) %>%
+  filter(min_rank(desc(tmax)) < 4)
+```
+
+Lag function
+
+```{r}
+weather_df %>%
+  group_by(name) %>%
+  mutate(lag_tmax = lag(tmax))
+```
+
+ONe day change in temp using lag function
+
+```{r}
+weather_df %>%
+  group_by(name) %>%
+  mutate(temp_change = tmax - lag(tmax))
+```
+
+```{r}
+weather_df %>%
+  group_by(name) %>%
+  mutate(temp_change = tmax - lag(tmax)) %>% 
+  summarize(sd_temp_change = sd(temp_change, na.rm = TRUE))
+```
